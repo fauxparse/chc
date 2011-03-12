@@ -1,4 +1,5 @@
 GEM
+  remote: http://rubygems.org/
   specs:
     activesupport (3.0.5)
     haml (3.0.25)
