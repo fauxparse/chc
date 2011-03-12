@@ -1,0 +1,165 @@
+#header
+  %h1 CHC
+  #navigation
+    %dl
+      %dt{:class => "domestic"} Domestic
+      %dd{:class => "domestic arrivals"}
+        %a{:href => "/#domestic/arrivals"} Arrivals
+      %dd{:class => "domestic departures"}
+        %a{:href => "/#domestic/departures"} Departures
+      %dt{:class => "international"} International
+      %dd{:class => "international arrivals"}
+        %a{:href => "/#international/arrivals"} Arrivals
+      %dd{:class => "international departures"}
+        %a{:href => "/#international/departures"} Departures
+#flights
+  #viewport
+    #domestic-arrivals.pane
+      %ul
+    #domestic-departures.pane
+      %ul
+    #international-arrivals.pane
+      %ul
+    #international-departures.pane
+      %ul
+%script{:src => "/js/zepto.js"}
+%script{:src => "/js/underscore.js"}
+%script{:src => "/js/backbone.js"}
+%script{:src => "/js/iscroll.js"}
+:javascript
+  Date.prototype.clock = function() {
+    var h = this.getHours(), m = this.getMinutes();
+    return (h < 10 ? '0' + h : h) + ':' + (m < 10 ? '0' + m : m);
+  }
+
+  $(document).ready(function() {
+    var Flight = Backbone.Model.extend({
+      initialize: function(attributes) {
+        this.attributes.scheduled = new Date(parseInt(attributes.scheduled));
+        this.attributes.estimated = new Date(parseInt(attributes.estimated));
+      }
+    });
+    
+    var Flights = Backbone.Collection.extend({
+      model: Flight,
+      initialize: function(models, options) {
+        this.options = options;
+      },
+      url: function() {
+        return '/' + this.options.terminal + '/' + this.options.direction;
+      }
+    });
+    
+    var FlightView = Backbone.View.extend({
+      tagName: 'li',
+
+      initialize: function() {
+        _.bindAll(this, 'render', 'close');
+        this.model.bind('change', this.render);
+      },
+      
+      render: function() {
+        var scheduled = this.model.attributes.scheduled.clock(),
+            estimated = this.model.attributes.estimated.clock();
+        $(this.el).addClass('flight')
+          .html('')
+          .append('<span class="flight-numbers">' + this.model.attributes.flight_numbers.join('<br>') + '</span>')
+          .append('<span class="info">' + this.model.attributes.cities.join('<br>') + '<span class="status">' + this.model.attributes.status + '</span></span>')
+          .append('<span class="time">' + estimated + (scheduled == estimated ? '' : '<del>' + scheduled + '</del>') + '</span>');
+        if (gate = this.model.attributes.gate) {
+          $(this.el).append('<span class="gate">' + this.model.attributes.gate + '</span>');
+        }
+        return this;
+      }
+    });
+    
+    var FlightsView = Backbone.View.extend({
+      initialize: function() {
+        this.flights = new Flights([], {
+          terminal:  this.options.terminal,
+          direction: this.options.direction
+        });
+        
+        _.bindAll(this, 'add', 'addAll', 'refresh');
+        this.flights.bind('add',     this.add);
+        this.flights.bind('refresh', this.addAll);
+      },
+      
+      add: function(flight) {
+        var view = new FlightView({ model: flight });
+        this.$('ul').append(view.render().el);
+      },
+      
+      addAll: function() {
+        this.$('ul').html('');
+        this.flights.each(this.add);
+        setTimeout(function () {
+      		application.view.scroller.refresh();
+      	}, 100);
+      },
+      
+      refresh: function() {
+        this.flights.fetch();
+      }
+    });
+    
+    var flights = {};
+    
+    var RootView = Backbone.View.extend({
+      initialize: function() {
+        var self = this;
+        this.views = { domestic:{}, international:{} };
+        this.$('.pane').each(function() {
+          var td = this.id.split('-');
+          self.views[td[0]][td[1]] = new FlightsView({
+            el: this,
+            terminal: td[0],
+            direction: td[1]
+          });
+        });
+        
+        setTimeout(function () {
+          self.scroller = new iScroll('flights', {
+            pullToRefresh: 'down',
+            onPullDown: function() {
+              self.view.refresh();
+            }
+          });
+      	}, 100);
+      },
+      
+      switchTo: function(terminal, direction) {
+        (this.view = this.views[terminal][direction]).refresh();
+      }
+    });
+    
+    var Application = Backbone.Controller.extend({
+      routes: {
+        ":terminal/:direction": 'flights'
+      },
+      
+      initialize: function(options) {
+        _.bindAll(this, 'flights');
+        this.view = new RootView({ el: $('#flights') });
+      },
+
+      flights: function(terminal, direction) {
+        $('#navigation dt, #navigation dd')
+          .removeClass('active')
+          .parent()
+          .find('dt.' + terminal + ', dd.' + terminal + '.' + direction)
+          .addClass('active');
+        $('#flights .pane').hide();
+        $('#' + terminal + '-' + direction).show();
+        this.view.switchTo(terminal, direction);
+      }
+
+    });
+
+    var application = new Application();
+    Backbone.history.start();
+
+    if (!window.location.hash) {
+      $('#navigation a').first().trigger('click');
+    }
+  });

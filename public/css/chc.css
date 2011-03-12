@@ -1,0 +1,215 @@
+body {
+  background: #333;
+  color: #eee;
+  margin: 0px;
+  padding: 0px;
+  text-shadow: black 0px -1px 1px;
+  font: 11px/14px "Helvetica Neue", sans-serif;
+}
+
+#header {
+  position: fixed;
+  z-index: 10;
+  top: 0px;
+  left: -8px;
+  right: -8px;
+  padding: 8px 16px;
+  background: #111;
+  -webkit-box-shadow: black 0px 1px 4px;
+}
+
+#header h1 {
+  float: left;
+  margin: 0px;
+  font-size: 26px;
+  line-height: 1em;
+}
+
+/*#header h1:after {
+  content: '✈';
+}
+*/
+#header dl {
+  float: right;
+  position: relative;
+  margin: 0;
+  padding: 0;
+  color: #666;
+  font-weight: bold;
+  height: 28px;
+  width: 22em;
+}
+
+#header dl dt {
+  float: left;
+  width: 10em;
+  margin: 0 -11em 0 0;
+  padding: 0 0.5em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+#header dl dd {
+  float: left;
+  margin: -0px 0 0 0;
+  padding: 0px 0.5em 0px;
+}
+
+#header dl dd a {
+  display: block;
+  padding-top: 12px;
+  text-decoration: none;
+  color: #666;
+}
+
+#header dt.active,
+#header dd.active a {
+  color: white;
+}
+
+#flights {
+  position: fixed;
+  top: 44px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: auto;
+  height: auto;
+}
+
+#flights ul {
+  margin: 0;
+  padding: 0;
+}
+
+#flights li {
+  display: block;
+  list-style: none;
+  margin: 0px;
+  padding: 8px;
+  background: #eee;
+  border-top: 1px solid white;
+  border-bottom: 1px solid #ccc;
+  overflow: hidden;
+  color: #333;
+  text-shadow: white 0px 1px 0px;
+}
+
+#flights li .flight-numbers,
+#flights li .info {
+  display: block;
+  float: left;
+  width: 64px;
+}
+
+#flights li .flight-numbers {
+  font-weight: bold;
+}
+
+#flights li .info {
+  width: 160px;
+}
+
+#flights li .info .status {
+  display: block;
+  font-weight: bold;
+}
+
+#flights li .time {
+  float: right;
+  width: 3em;
+  text-align: right;
+  font-size: 150%;
+}
+
+#flights li .time del {
+  display: block;
+  color: #999;
+  text-decoration: line-through;
+  text-shadow: none;
+  font-size: 85%;
+}
+
+#flights li .gate {
+  display: block;
+  float: right;
+  background: #666;
+  color: #eee;
+  font-weight: bold;
+  padding: 4px;
+  margin: -2px 0px;
+  min-width: 14px;
+  min-height: 14px;
+  text-align: center;
+  text-shadow: #333 0px 1px 1px;
+  -webkit-border-radius: 11px;
+  -webkit-box-shadow: inset #333 0px 1px 1px, white 0px 1px 1px;
+}
+
+/**
+ *
+ * Styles specific to the pull down/up element
+ *
+ */
+.iScrollPullDown,
+.iScrollPullUp {
+	background:#eee;
+	border-bottom:1px solid #ccc;
+	height:40px;
+	line-height:40px;
+	padding:5px 10px;
+	font-size:14px;
+	color:#999;
+	text-shadow: none;
+	font-weight:bold;
+	-webkit-transform:translate3d(0,0,0);	/* Put the element in the HW accelerated layer */
+}
+
+.iScrollPullDownIcon,
+.iScrollPullUpIcon {
+	display:block; float:left;
+	width:40px; height:40px;
+	background:url(../img/pull-icon.png) 0 0 no-repeat;
+	background-size:40px 80px;
+	margin-right:5px;
+	-webkit-transition-property:-webkit-transform;
+	-webkit-transition-duration:250ms;
+	-webkit-transform:rotate(0);
+}
+
+.iScrollPullDown.flip .iScrollPullDownIcon {
+	-webkit-transform:rotate(-180deg);
+}
+
+.iScrollPullDown.loading .iScrollPullDownIcon,
+.iScrollPullUp.loading .iScrollPullUpIcon {
+	background-position:0 100%;
+	-webkit-animation-name:loading;
+	-webkit-animation-duration:1.5s;
+	-webkit-animation-iteration-count:infinite;
+	-webkit-animation-timing-function:linear;
+}
+
+.iScrollPullUp {
+	border-bottom:0;
+}
+
+.iScrollPullUpIcon {
+	-webkit-transform:rotate(-180deg);
+}
+
+.iScrollPullUp.flip .iScrollPullUpIcon {
+	-webkit-transform:rotate(0);
+}
+
+@-webkit-keyframes loading {
+	from { -webkit-transform:rotate(0deg); }
+	to { -webkit-transform:rotate(360deg); }
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:2) {
+	.iScrollPullDownIcon,
+	.iScrollPullUpIcon {
+		background-image:url(../img/pull-icon@2x.png);
+	}
+}
