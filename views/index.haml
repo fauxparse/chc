@@ -12,6 +12,9 @@
         %a{:href => "/#international/arrivals"} Arrivals
       %dd{:class => "international departures"}
         %a{:href => "/#international/departures"} Departures
+#loading
+  .icon
+  %p Loading…
 #flights
   #viewport
     #domestic-arrivals.pane
@@ -64,8 +67,10 @@
         $(this.el).addClass('flight')
           .html('')
           .append('<span class="flight-numbers">' + this.model.attributes.flight_numbers.join('<br>') + '</span>')
-          .append('<span class="info">' + this.model.attributes.cities.join('<br>') + '<span class="status">' + this.model.attributes.status + '</span></span>')
-          .append('<span class="time">' + estimated + (scheduled == estimated ? '' : '<del>' + scheduled + '</del>') + '</span>');
+          .append('<span class="info"><span class="cities">' + this.model.attributes.cities.join('<br>') + '</span><span class="status">' + this.model.attributes.status + '</span></span>')
+          .append('<span class="time">' + estimated + (scheduled == estimated ? '' : '<del>' + scheduled + '</del>') + '</span>')
+          .addClass(this.model.attributes.status.toLowerCase().replace(/\s*\d.*$/, '').replace(/[\s:]+/g, '-'));
+          if (/^delayed/i.test(this.model.attributes.status)) $(this.el).addClass('delayed');
         if (gate = this.model.attributes.gate) {
           $(this.el).append('<span class="gate">' + this.model.attributes.gate + '</span>');
         }

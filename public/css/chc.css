@@ -87,19 +87,35 @@ body {
   list-style: none;
   margin: 0px;
   padding: 8px;
-  background: #eee;
+  background: #f8f8f8 -webkit-gradient(linear, left top, left bottom, from(rgba(255, 255, 255, 0.1)), to(rgba(0, 0, 0, 0.1)));
   border-top: 1px solid white;
   border-bottom: 1px solid #ccc;
   overflow: hidden;
   color: #333;
-  text-shadow: white 0px 1px 0px;
+  text-shadow: rgba(255, 255, 255, 0.5) 0px 1px 0px;
 }
+
+#flights li.delayed                 .status { color: #ff5800; }
+#flights li.departed                .status { color: #ed1c24; }
+#flights li.final-call              .status { color: #ed1c24; }
+#flights li.go-to-departure-lounge  .status { color: #549820; }
+#flights li.go-to-departure-gate    .status { color: #549820; }
+#flights li.go-to-checkin           .status { color: #549820; }
+#flights li.landed                  .status { color: #549820; }
+#flights li.new-time                .status { color: #008fd0; }
 
 #flights li .flight-numbers,
 #flights li .info {
   display: block;
   float: left;
   width: 64px;
+}
+
+#flights li .cities {
+  display: block;
+  font-size: 125%;
+  margin-top: -0.2em;
+  margin-bottom: 2px;
 }
 
 #flights li .flight-numbers {
@@ -145,6 +161,40 @@ body {
   -webkit-border-radius: 11px;
   -webkit-box-shadow: inset #333 0px 1px 1px, white 0px 1px 1px;
 }
+
+#loading {
+  position: fixed;
+  left: 50px;
+  right: 50px;
+  top: 50%;
+  margin-top: -20px;
+  opacity: 0.5;
+}
+
+#loading .icon {
+	display:block;
+	float:left;
+	width:40px;
+	height:40px;
+	margin-right: 5px;
+	background:url(../img/pull-icon.png) 0 100% no-repeat;
+	background-size:40px 80px;
+	-webkit-animation-name:loading;
+	-webkit-animation-duration:1.5s;
+	-webkit-animation-iteration-count:infinite;
+	-webkit-animation-timing-function:linear;
+}
+
+#loading p {
+  margin: 0px;
+  padding: 0px;
+  font-size: 200%;
+  text-shadow: none;
+  color: #ccc;
+  line-height: 36px;
+  vertical-align: middle;
+}
+
 
 /**
  *
