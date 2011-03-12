@@ -4,17 +4,17 @@
     %dl
       %dt{:class => "domestic"} Domestic
       %dd{:class => "domestic arrivals"}
-        %a{:href => "/#domestic/arrivals"} Arrivals
+        %a{:href => "#/domestic/arrivals"} Arrivals
       %dd{:class => "domestic departures"}
-        %a{:href => "/#domestic/departures"} Departures
+        %a{:href => "#/domestic/departures"} Departures
       %dt{:class => "international"} International
       %dd{:class => "international arrivals"}
-        %a{:href => "/#international/arrivals"} Arrivals
+        %a{:href => "#/international/arrivals"} Arrivals
       %dd{:class => "international departures"}
-        %a{:href => "/#international/departures"} Departures
+        %a{:href => "#/international/departures"} Departures
 #loading
   .icon
-  %p Loading…
+  %p Loading flights…
 #flights
   #viewport
     #domestic-arrivals.pane
@@ -131,6 +131,11 @@
             }
           });
       	}, 100);
+      	
+      	$('#header h1').bind('click', function() {
+      	  self.scroller.scrollTo(0, 0, 500);
+      	  return false;
+      	});
       },
       
       switchTo: function(terminal, direction) {
@@ -140,7 +145,7 @@
     
     var Application = Backbone.Controller.extend({
       routes: {
-        ":terminal/:direction": 'flights'
+        "/:terminal/:direction": 'flights'
       },
       
       initialize: function(options) {

@@ -97,6 +97,7 @@ body {
 
 #flights li.delayed                 .status { color: #ff5800; }
 #flights li.departed                .status { color: #ed1c24; }
+#flights li.departing               .status { color: #ed1c24; }
 #flights li.final-call              .status { color: #ed1c24; }
 #flights li.go-to-departure-lounge  .status { color: #549820; }
 #flights li.go-to-departure-gate    .status { color: #549820; }
@@ -149,25 +150,26 @@ body {
 #flights li .gate {
   display: block;
   float: right;
-  background: #666;
+  background: #999;
   color: #eee;
   font-weight: bold;
+  line-height: 16px;
+  font-size: 125%;
   padding: 4px;
-  margin: -2px 0px;
-  min-width: 14px;
-  min-height: 14px;
+  margin: -4px 0px;
+  min-width: 16px;
+  min-height: 16px;
   text-align: center;
   text-shadow: #333 0px 1px 1px;
-  -webkit-border-radius: 11px;
+  -webkit-border-radius: 12px;
   -webkit-box-shadow: inset #333 0px 1px 1px, white 0px 1px 1px;
 }
 
 #loading {
   position: fixed;
-  left: 50px;
-  right: 50px;
-  top: 50%;
-  margin-top: -20px;
+  left: 20px;
+  right: 20px;
+  top: 65%;
   opacity: 0.5;
 }
 
