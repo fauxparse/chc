@@ -142,10 +142,10 @@
 
       flights: function(terminal, direction) {
         $('#info').removeClass('open');
-        $('#navigation dt, #navigation dd')
+        $('#navigation li')
           .removeClass('active')
           .parent()
-          .find('dt.' + terminal + ', dd.' + terminal + '.' + direction)
+          .find('.' + terminal + '.' + direction)
           .addClass('active');
         $('#flights .pane').hide();
         $('#' + terminal + '-' + direction).show();

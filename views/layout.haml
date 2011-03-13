@@ -11,19 +11,16 @@
   %body
     #container
       #header
-        %h1 CHC
         #navigation
-          %dl
-            %dt{:class => "domestic"} Domestic
-            %dd{:class => "domestic arrivals"}
-              %a{:href => "#/domestic/arrivals"} Arrivals
-            %dd{:class => "domestic departures"}
-              %a{:href => "#/domestic/departures"} Departures
-            %dt{:class => "international"} International
-            %dd{:class => "international arrivals"}
-              %a{:href => "#/international/arrivals"} Arrivals
-            %dd{:class => "international departures"}
-              %a{:href => "#/international/departures"} Departures
+          %ul
+            %li{:class => "domestic arrivals"}
+              %a{:href => "#/domestic/arrivals"} Domestic ARRIVALS
+            %li{:class => "domestic departures"}
+              %a{:href => "#/domestic/departures"} Domestic DEPARTURES
+            %li{:class => "international arrivals"}
+              %a{:href => "#/international/arrivals"} International ARRIVALS
+            %li{:class => "international departures"}
+              %a{:href => "#/international/departures"} International DEPARTURES
       = yield
       #info
         %a{:class => "toggle", :href => "#/info"} i
@@ -43,7 +40,7 @@
             :markdown
               The code is [available on GitHub](http://github.com/fauxparse/chc) for the curious.
               Uses [Sinatra](http://www.sinatrarb.com/), [Hpricot](https://github.com/hpricot/hpricot/wiki),
-              [HAML](http://haml-lang.com/), and [Redis](http://redis.io/). Powered by [Heroku](http://heroku.com/).
+              [HAML](http://haml-lang.com/), [Redis](http://redis.io/), and [iScroll](http://cubiq.org/iscroll-4). Powered by [Heroku](http://heroku.com/).
         .attribution
           :markdown
-            by [@fauxparse](http://twitter.com/fauxparse)
+            **CHC** ✈ [@fauxparse](http://twitter.com/fauxparse)
