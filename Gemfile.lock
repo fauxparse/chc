@@ -7,6 +7,7 @@ GEM
     i18n (0.5.0)
     json (1.5.1)
     rack (1.2.1)
+    rdiscount (1.6.8)
     redis (2.1.1)
     sinatra (1.2.0)
       rack (~> 1.1)
@@ -23,6 +24,7 @@ DEPENDENCIES
   hpricot
   i18n
   json
+  rdiscount
   redis
   sinatra
   tzinfo

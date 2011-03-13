@@ -1,4 +1,4 @@
-!!!
+!!! 5
 %html
   %head
     %title CHC
@@ -10,4 +10,40 @@
     %link{:rel => "apple-touch-icon", :href => "/img/icon.png"}
   %body
     #container
+      #header
+        %h1 CHC
+        #navigation
+          %dl
+            %dt{:class => "domestic"} Domestic
+            %dd{:class => "domestic arrivals"}
+              %a{:href => "#/domestic/arrivals"} Arrivals
+            %dd{:class => "domestic departures"}
+              %a{:href => "#/domestic/departures"} Departures
+            %dt{:class => "international"} International
+            %dd{:class => "international arrivals"}
+              %a{:href => "#/international/arrivals"} Arrivals
+            %dd{:class => "international departures"}
+              %a{:href => "#/international/departures"} Departures
       = yield
+      #info
+        %a{:class => "toggle", :href => "#/info"} i
+        .about
+          %h2 Christchurch flight information
+          .disclaimer
+            :markdown
+              Hacked together in an afternoon, in the absence of an official CIAL mobile app,
+              from the information on the [public website](http://www.christchurchairport.co.nz/).
+            
+              Consequently, **none of this is official**, and the whole thing could disappear or stop
+              working at any time.
+
+              The information presented here could be **up to two minutes old**,
+              so please don't blame me if you miss your flight.
+          .code
+            :markdown
+              The code is [available on GitHub](http://github.com/fauxparse/chc) for the curious.
+              Uses [Sinatra](http://www.sinatrarb.com/), [Hpricot](https://github.com/hpricot/hpricot/wiki),
+              [HAML](http://haml-lang.com/), and [Redis](http://redis.io/). Powered by [Heroku](http://heroku.com/).
+        .attribution
+          :markdown
+            by [@fauxparse](http://twitter.com/fauxparse)

@@ -1,17 +1,3 @@
-#header
-  %h1 CHC
-  #navigation
-    %dl
-      %dt{:class => "domestic"} Domestic
-      %dd{:class => "domestic arrivals"}
-        %a{:href => "#/domestic/arrivals"} Arrivals
-      %dd{:class => "domestic departures"}
-        %a{:href => "#/domestic/departures"} Departures
-      %dt{:class => "international"} International
-      %dd{:class => "international arrivals"}
-        %a{:href => "#/international/arrivals"} Arrivals
-      %dd{:class => "international departures"}
-        %a{:href => "#/international/departures"} Departures
 #loading
   .icon
   %p Loading flights…
@@ -145,15 +131,17 @@
     
     var Application = Backbone.Controller.extend({
       routes: {
-        "/:terminal/:direction": 'flights'
+        '/:terminal/:direction': 'flights',
+        '/info': 'info'
       },
       
       initialize: function(options) {
-        _.bindAll(this, 'flights');
+        _.bindAll(this, 'flights', 'info');
         this.view = new RootView({ el: $('#flights') });
       },
 
       flights: function(terminal, direction) {
+        $('#info').removeClass('open');
         $('#navigation dt, #navigation dd')
           .removeClass('active')
           .parent()
@@ -162,8 +150,12 @@
         $('#flights .pane').hide();
         $('#' + terminal + '-' + direction).show();
         this.view.switchTo(terminal, direction);
-      }
+      },
 
+      info: function() {
+        $('#info').addClass('open');
+        $('#navigation dt, #navigation dd').removeClass('active')
+      }
     });
 
     var application = new Application();

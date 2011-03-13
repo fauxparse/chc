@@ -7,6 +7,14 @@ body {
   font: 11px/14px "Helvetica Neue", sans-serif;
 }
 
+#container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
 #header {
   position: fixed;
   z-index: 10;
@@ -72,7 +80,7 @@ body {
   top: 44px;
   left: 0;
   right: 0;
-  bottom: 0;
+  bottom: 24px;
   width: auto;
   height: auto;
 }
@@ -264,4 +272,106 @@ body {
 	.iScrollPullUpIcon {
 		background-image:url(../img/pull-icon@2x.png);
 	}
+}
+
+#info {
+  position: fixed;
+  top: 100%;
+  margin-top: -24px;
+  left: -8px;
+  right: -8px;
+  bottom: 0px;
+  background: rgba(255, 255, 255, 0.9);
+  color: #333;
+  font-size: 13px;
+  line-height: 24px;
+  text-shadow: none;
+  padding: 24px 8px 0px;
+  overflow: hidden;
+  -webkit-transition: top 0.25s ease-out, margin-top 0.25s ease-out;
+}
+
+#info.open {
+  top: 0%;
+  margin-top: 44px;
+}
+
+#info a.toggle {
+  position: absolute;
+  right: 16px;
+  top: 4px;
+  line-height: 16px;
+  width: 16px;
+  text-align: center;
+  vertical-align: middle;
+  background: #eee;
+  color: #222;
+  font-weight: bold;
+  font-style: italic;
+  font-family: serif;
+  font-size: 16px;
+  text-decoration: none;
+  -webkit-border-radius: 8px;
+  z-index: 3;
+  -webkit-box-shadow: inset rgba(0, 0, 0, 0.25) 0px 1px 1px;
+}
+
+#info .about {
+  padding: 12px;
+  line-height: 16px;
+  color: #333;
+  text-shadow: white 0px 1px 1px;
+  position: relative;
+}
+
+#info h2 {
+  font-size: 18px;
+  margin: 0px;
+  color: black;
+}
+
+#info h2:before {
+  content: "✈";
+  position: absolute;
+  right: 0px;
+  bottom: 0px;
+  font-size: 240px;
+  opacity: 0.1;
+}
+
+#info p {
+  margin: 1ex 0px 0px;
+  position: relative;
+}
+
+#info a {
+  color: #ec008c;
+  text-decoration: none;
+}
+
+#info .attribution {
+  position: absolute;
+  left: 8px;
+  right: 8px;
+  top: 0px;
+  height: 24px;
+  line-height: 24px;
+  vertical-align: middle;
+  background: #222;
+  z-index: 2;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.5) 0px 1px 4px;
+}
+
+#info .attribution a {
+  color: #bbb;
+}
+
+#info.open .attribution a {
+  color: #ec008c;
+}
+
+#info .attribution p {
+  color: #999;
+  margin: 0px;
+  padding: 0px 8px;
 }
