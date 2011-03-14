@@ -1,4 +1,4 @@
-require "./lib/flights"
+require "./cache"
 
 configure do
   REDIS = if config = ENV['REDISTOGO_URL']
@@ -23,7 +23,7 @@ end
     get "/#{terminal}/#{kind}s" do
       content_type :json
       headers['Cache-Control'] = 'max-age=30, must-revalidate'
-      Flight.all.select { |f| f.send(:"#{terminal}?") && f.send(:"#{kind}?") }.to_json
+      Cache.with(terminal, kind).to_json
     end
   end
 end
