@@ -40,8 +40,8 @@ class Cache
           "airline"        => (td[0]/"a")[0].attributes["title"],
           "flight_numbers" => td[1].children.select(&:text?).map { |n| n.to_s.strip },
           "cities"         => td[2].children.select(&:text?).map { |n| n.to_s.strip },
-          "scheduled"      => Time.zone.parse(td[3].inner_text),
-          "estimated"      => Time.zone.parse(td[4].inner_text),
+          "scheduled"      => Time.zone.parse(td[3].inner_text).to_time.to_i * 1000,
+          "estimated"      => Time.zone.parse(td[4].inner_text).to_time.to_i * 1000,
           "gate"           => td[5].inner_text,
           "status"         => td[6].inner_text.gsub(/^\*|\*$/, "")
         }
