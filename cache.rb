@@ -4,7 +4,6 @@ require "net/http"
 require "cgi"
 require "uri"
 require "active_support/time"
-require "./lib/scraper"
 
 class Cache
   def initialize
